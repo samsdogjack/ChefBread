@@ -1,10 +1,10 @@
 const express = require('express')
 const breads = express.Router()
-const bread = require('..models/bread')
+const Bread = require('../models/bread')
 
 // INDEX
 breads.get('/', (req, res) => {
-  res.send('This is the index at /breads')
+  res.send(Bread)
 })
 
 // SHOW
@@ -14,7 +14,6 @@ breads.get('/:arrayIndex', (req, res) => {
   
 
 module.exports = breads
-
 
 
 
