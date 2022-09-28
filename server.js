@@ -8,6 +8,32 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const app = express()
 
+// MIDDLEWARE
+app.use(express.static('public'))
+
+// MIDDLEWARE
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
+app.use(express.urlencoded({extended: true}))
+
+// 404 Page
+app.get('*', (req, res) => {
+  res.send('404')
+})
+
+// SHOW
+breads.get('/:arrayIndex', (req, res) => {
+  if (Bread[req.params.arrayIndex]) {
+    res.render('Show', {
+      bread:Bread[req.params.arrayIndex]
+    })
+  } else {
+    res.send('404')
+  }
+})
+
+
 // ROUTES
 app.get('/', (req, res) => {
   res.send('Welcome to an Awesome App about Breads!')
@@ -22,21 +48,6 @@ app.listen(PORT, () => {
   console.log('listening on port', PORT);
 })
 
-  // MIDDLEWARE
-app.set('views', __dirname + '/views')
-app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
-app.use(express.urlencoded({extended: true}))
 
  
-  // CREATE
-breads.post('/', (req, res) => {
-  console.log(req.body)
-  if(req.body.hasGluten === 'on') {
-    req.body.hasGluten = 'true'
-  } else {
-    req.body.hasGluten = 'false'
-  }
-  Bread.push(req.body)
-  res.redirect('/breads')
-})
+
