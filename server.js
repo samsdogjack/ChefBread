@@ -26,6 +26,17 @@ app.listen(PORT, () => {
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
+app.use(express.urlencoded({extended: true}))
 
  
-  
+  // CREATE
+breads.post('/', (req, res) => {
+  console.log(req.body)
+  if(req.body.hasGluten === 'on') {
+    req.body.hasGluten = 'true'
+  } else {
+    req.body.hasGluten = 'false'
+  }
+  Bread.push(req.body)
+  res.redirect('/breads')
+})
