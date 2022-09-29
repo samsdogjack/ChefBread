@@ -17,23 +17,6 @@ app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.urlencoded({extended: true}))
 
-// 404 Page
-app.get('*', (req, res) => {
-  res.send('404')
-})
-
-// SHOW
-breads.get('/:arrayIndex', (req, res) => {
-  if (Bread[req.params.arrayIndex]) {
-    res.render('Show', {
-      bread:Bread[req.params.arrayIndex]
-    })
-  } else {
-    res.send('404')
-  }
-})
-
-
 // ROUTES
 app.get('/', (req, res) => {
   res.send('Welcome to an Awesome App about Breads!')
@@ -42,6 +25,11 @@ app.get('/', (req, res) => {
  // Breads
  const breadsController = require('./controllers/breads_controller.js')
  app.use('/breads', breadsController)
+
+ // 404 Page
+app.get('*', (req, res) => {
+  res.send('404')
+})
 
 // LISTEN
 app.listen(PORT, () => {
