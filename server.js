@@ -9,6 +9,9 @@ const PORT = process.env.PORT
 const app = express()
 
 // MIDDLEWARE
+app.use(express.urlencoded({extended: true}))
+
+// MIDDLEWARE
 app.use(express.static('public'))
 
 // MIDDLEWARE
