@@ -5,7 +5,8 @@ function Index({ breads, title }) {
   return (
     <Default title={title}>
       ...
-      <h2>Index Page</h2>
+      <h2>Chef's Bread</h2>
+      <h3>Index Page</h3>
       <div className="newButton">
         <a href="/breads/new">
           <button>Add a new bread</button>
