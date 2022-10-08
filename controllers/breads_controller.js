@@ -29,7 +29,7 @@ breads.get('/:id/edit', (req, res) => {
 })
 
 
-
+//show before instance method
 // SHOW
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
@@ -71,7 +71,7 @@ breads.post('/', (req, res) => {
 
 
 // UPDATE
-breads.put('/:arrayIndex', (req, res) => {
+breads.put('/:id', (req, res) => {
   if (req.body.hasGluten === 'on') {
     req.body.hasGluten = true
   } else {
@@ -85,7 +85,7 @@ breads.put('/:arrayIndex', (req, res) => {
 })
 
 // EDIT
-breads.get('/:indexArray/edit', (req, res) => {
+breads.get('/:id/edit', (req, res) => {
   res.render('edit', {
     bread: Bread[req.params.indexArray],
     index: req.params.indexArray

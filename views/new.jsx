@@ -13,6 +13,7 @@ function New() {
         <input type="text" name="image" id="image" />
         <label htmlFor="hasGluten">Has Gluten?</label>
         <input type="checkbox" name="hasGluten" id="hasGluten" defaultChecked />
+       {/*add bakers here*/}
         <label htmlFor="baker">Baker</label>
 <select name="baker" id="baker">
   <option value="Rachel">Rachel</option>
