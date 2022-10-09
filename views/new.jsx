@@ -24,11 +24,29 @@ function New() {
   <option value="Phoebe">Phoebe</option>
 </select>
 
+{/*does this go here - BreadCRUD Second Model (be-9-multiple-mongoose-models-and-relationships)*/}
+{/*function New ({bakers}) {
+    return (
+        [...]
+
+        <label htmlFor="baker">Baker</label>
+        <select name="baker" id="baker">
+            {bakers.map((baker) => {
+                return(
+                    <option value={baker.id} key={baker.id}>{baker.name}</option>
+                )
+            })}
+        </select>
+
+        [...]
+    )
+}
+
         <br />
         <input type="submit" />
       </form>
     </Default>
   );
-}
+}*/}
 
 module.exports = New;

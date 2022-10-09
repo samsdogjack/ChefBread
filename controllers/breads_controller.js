@@ -1,6 +1,7 @@
 const express = require("express");
 const breads = express.Router();
 const Bread = require("../models/bread");
+const Baker = require('../models/baker.js')
 
 // INDEX
 breads.get('/', (req, res) => {
@@ -19,15 +20,24 @@ breads.get('/new', (req, res) => {
 
 
 // NEW
-breads.get('/:id/edit', (req, res) => {
-  Bread.findById(req.params.id) 
-    .then(foundBread => { 
-      res.render('edit', {
-        bread: foundBread 
-      })
+// breads.get('/:id/edit', (req, res) => {
+//   Bread.findById(req.params.id) 
+//     .then(foundBread => { 
+//       res.render('edit', {
+//         bread: foundBread 
+//       })
+//     })
+// })
+
+// in the new route
+breads.get('/new', (req, res) => {
+  Baker.find()
+      .then(foundBakers => {
+          res.render('new', {
+              bakers: foundBakers
+          })
     })
 })
-
 
 //show before instance method
 // SHOW
