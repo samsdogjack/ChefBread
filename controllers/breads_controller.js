@@ -1,17 +1,21 @@
 const express = require("express");
 const breads = express.Router();
 const Bread = require("../models/bread");
-const Baker = require('../models/baker.js')
+//const Baker = require("../models/baker.js")
 
 // INDEX
 breads.get('/', (req, res) => {
+  Bakers.find()
+  .then(foundBakers => {
   Bread.find()
     .then(foundBreads => {
       res.render('index', {
         breads: foundBreads,
+        bakers: foundBakers
         title: 'Index Page'
       })
     })
+  })
 })
 
 breads.get('/new', (req, res) => {
@@ -97,9 +101,15 @@ breads.put('/:id', (req, res) => {
 
 // EDIT
 breads.get('/:id/edit', (req, res) => {
-  res.render('edit', {
-    bread: Bread[req.params.indexArray],
-    index: req.params.indexArray
+  Baker.find()
+    .then(foundBakers => {
+      Bread.findById(req.params.id)
+      .then(foundBread => {
+        res.render('edit', {
+          bread: foundBread,
+          index: foundBakers
+        })
+      })
   })
 })
 
