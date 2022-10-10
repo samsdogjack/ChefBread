@@ -43,6 +43,7 @@ breads.get('/new', (req, res) => {
 // SHOW
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
+  .populate('baker')
     .then(foundBread => {
       res.render('show', {
         bread: foundBread
