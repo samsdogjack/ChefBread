@@ -1,21 +1,13 @@
 // dependencies
 const mongoose = require('mongoose')
+const breads = require('../controllers/breads_controller')
 const { Schema } = mongoose
 const Bread = require('./bread')
 
-//[ ... ]
 
-// Virtuals:
-bakerSchema.virtual('breads', {
-    ref: 'Bread',
-    localField: '_id',
-    foreignField: 'baker'
-})
 
 // schema
 const bakerSchema = new Schema({
-    [ ... ]
-}.{ toJSON: { virtuals: true }})
     name: {
         type: String,
         required: true,
@@ -26,9 +18,22 @@ const bakerSchema = new Schema({
         required: true
     },
     bio: String
+}, { toJSON: { virtuals: true }})
+
+// hooks 
+bakerSchema.post('findOneAndDelete', function() {
+   breads.deleteMany({baker: this._conditions._id })
+   .then(deleteStatus =>{
+    console.log (deleteStatus)
+   })
+})            
+
+// Virtuals:
+bakerSchema.virtual('breads', {
+    ref: 'Bread',
+    localField: '_id',
+    foreignField: 'baker'
 })
-
-
 
 // model and export
 const Baker = mongoose.model('Baker', bakerSchema)

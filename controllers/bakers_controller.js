@@ -19,25 +19,38 @@ baker.get('/', (req, res) => {
 //         .then(foundBakers => {
 //             res.send(foundBakers)
 //         })
-// })                    
+// })   
 
-// baker.get('/data/seed', (req, res) => {
-//     Baker.insertMany(bakerSeedData)
-//     .then(res.redirect('/breads'))
-// })
+//delete
+baker.delete(':id', (req, res)=> {
+    Baker.findByIdAndDelte(req.params.id)
+    .then(deleteBaker =>{
+        res.status(303).redirect('/breads')
+        
+    })
+})
+//seed
+baker.get('/data/seed', (req, res) => {
+    Baker.insertMany(bakerSeedData)
+    .then(res.redirect('/breads'))
+})
 
 // export
 
-//Show
+// show 
 baker.get('/:id', (req, res) => {
     Baker.findById(req.params.id)
-    .populate('breads')
-    .then(foundBaker => {
-        res.render('bakerShow', {
-            baker: foundBaker
+        .populate({
+            path: 'breads',
+            options: { limit: 2 }
         })
-    })
+        .then(foundBaker => {
+            res.render('bakerShow', {
+                baker: foundBaker
+            })
+        })
 })
+
 
 module.exports = baker
 
